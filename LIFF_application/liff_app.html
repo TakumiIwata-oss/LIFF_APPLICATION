@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFF アプリ</title>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+    <div id="content">
+        <p id="userId"></p>
+        <p id="displayName"></p>
+        <img id="pictureUrl" width="200px">
+    </div>
+
+    <script>
+        // LIFFの初期化
+        liff.init({
+            liffId: "2007208830-ZEwnlrY9" // あなたの実際のLIFF IDに置き換えてください
+        }).then(() => {
+            // LIFFが初期化された後に実行される処理
+            if (liff.isLoggedIn()) {
+                // ユーザープロフィールの取得
+                liff.getProfile()
+                    .then(profile => {
+                        document.getElementById("userId").innerHTML = "User ID: " + profile.userId;
+                        document.getElementById("displayName").innerHTML = "Display Name: " + profile.displayName;
+                        document.getElementById("pictureUrl").src = profile.pictureUrl;
+                    })
+                    .catch(err => console.error(err));
+            } else {
+                // ログインしていない場合、ログイン画面にリダイレクト
+                liff.login();
+            }
+        }).catch(err => console.error(err));
+    </script>
+</body>
+</html>
