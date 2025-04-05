@@ -1,0 +1,2 @@
+# LIFF_APPLICATION
+LIFFアプリを格納するレポジトリ
